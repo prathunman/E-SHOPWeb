@@ -9,7 +9,7 @@ const Product = () => {
     const { products, currency, addToCart } = useContext(ShopContext)
     const [productData, setProductData] = useState(false)
     const [image, setImage] = useState('')
-    const [size, setSize] = useState('')
+    const [color, setColor] = useState('')
 
     const fetchProduct = async () => {
         products.map(product => {   
@@ -56,16 +56,16 @@ const Product = () => {
                     <p className='mt-5 text-3xl font-medium'>{ currency }{ productData.price }</p>
                     <p className='mt-5 text-gray-500 md:w-4/5'>{ productData.description }</p>
                     <div className='flex flex-col gap-4 my-8'>
-                        <p>Select Size</p>
+                        <p>Select Color</p>
                         <div className='flex gap-2'>
                             {
-                                productData.sizes.map((value,index) => (
-                                    <button onClick={() => setSize(value)} key={index} className={`border py-2 px-4 bg-gray-100 ${value === size ? 'border-orange-500' : ''}`}>{ value }</button>
+                                productData.colors.map((value,index) => (
+                                    <button onClick={() => setColor(value)} key={index} className={`border p-4  ${value === color ? '-mt-2' : ''}`} style={{background: value}}></button>
                                 ))
                             }
                         </div>
                     </div>
-                    <button onClick={() => addToCart(productData._id, size)} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>
+                    <button onClick={() => addToCart(productData._id, color)} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>
                         ADD TO CART
                     </button>
                     <hr className='mt-8 sm:w-4/5'/>
