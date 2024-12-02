@@ -5,7 +5,7 @@ import Title from '../components/Title'
 import ProductItems from '../components/ProductItems'
 const Collection = () => {
   
-    const { products } = useContext(ShopContext)
+    const { products, search, showSearch } = useContext(ShopContext)
     const [showFilters, setShowFilters] = useState(false)
     const [filterProducts, setFilterProducts] = useState([])
     const [category, setCategory] = useState([])
@@ -31,6 +31,10 @@ const Collection = () => {
     const applyFilter = () => {
         let newProducts = products.slice()
 
+        if(search && showSearch){
+            newProducts = newProducts.filter(product => product.name.toLowerCase().includes(search.toLowerCase()))
+        }
+
         if(category.length > 0){
             newProducts = newProducts.filter(product => category.includes(product.category))
         }
@@ -47,10 +51,11 @@ const Collection = () => {
 
         switch (sortType) {
             case 'low-high':
-                setFilterProducts(sortProducts.sort((a,b) => a.price - b.price))
+                sortProducts = sortProducts.toSorted((a,b) => a.price - b.price)
+                setFilterProducts(sortProducts)
                 break;
             case 'high-low':
-                setFilterProducts(sortProducts.sort((a,b) => b.price - a.price))
+                setFilterProducts(sortProducts.toSorted((a,b) => b.price - a.price))
                 break;
             default:
                 applyFilter()   
@@ -64,7 +69,7 @@ const Collection = () => {
 
     useEffect(() => {
         applyFilter()
-    }, [category, subCategory])
+    }, [category, subCategory, search, showSearch])
 
     useEffect(() => {
         sortProduct()
