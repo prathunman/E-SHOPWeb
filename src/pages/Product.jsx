@@ -12,7 +12,6 @@ const Product = () => {
     const [size, setSize] = useState('')
 
     const fetchProduct = async () => {
-        console.log(products)
         products.map(product => {   
             if (product._id === productId) {
                 setProductData(product)
