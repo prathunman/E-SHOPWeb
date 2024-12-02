@@ -71,7 +71,7 @@ const Product = () => {
                     <hr className='mt-8 sm:w-4/5'/>
                     <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
                         <p>100% Original product</p>
-                        <p>Free Delivery on order above Rs. 799</p>
+                        <p>Free Delivery on order above Rs. 100000</p>
                         <p>Pay on delivery might be available</p>
                     </div>
                 </div>
