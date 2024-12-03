@@ -21,19 +21,19 @@ const Navbar = () => {
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
         <NavLink to="/" className="flex flex-col items-center gap-1">
           <p>Home</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-black hidden" />
+          <hr className="w-full border-none h-[1.5px] bg-black hidden" />
         </NavLink>
         <NavLink to="/collection" className="flex flex-col items-center gap-1">
           <p>Collection</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-black hidden" />
+          <hr className="w-full border-none h-[1.5px] bg-black hidden" />
         </NavLink>
         <NavLink to="/about" className="flex flex-col items-center gap-1">
           <p>About</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-black hidden" />
+          <hr className="w-full border-none h-[1.5px] bg-black hidden" />
         </NavLink>
         <NavLink to="/contact" className="flex flex-col items-center gap-1">
           <p>Contact</p>
-          <hr className="w-2/4 border-none h-[1.5px] bg-black hidden" />
+          <hr className="w-full border-none h-[1.5px] bg-black hidden" />
         </NavLink>
       </ul>
 

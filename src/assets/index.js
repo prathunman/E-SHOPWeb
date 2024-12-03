@@ -43,7 +43,6 @@ import star_icon from './icons/star_icon.png'
 import support_img from './icons/support_img.png'
 import menu_icon from './icons/menu_icon.png'
 import razorpay_logo from './icons/razorpay_logo.png'
-import stripe_logo from './icons/stripe_logo.png'
 import cross_icon from './icons/cross_icon.png'
 
 export const assets = {
@@ -61,7 +60,6 @@ export const assets = {
     support_img,
     menu_icon,
     razorpay_logo,
-    stripe_logo,
     cross_icon
 }
 

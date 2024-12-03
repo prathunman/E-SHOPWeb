@@ -14,22 +14,52 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const validateFields = () => {
+    if (currentState === "Register") {
+      if (!user.name.trim()) {
+        toast.error("Name is required");
+        return false;
+      }
+    }
+    if (!user.email.trim()) {
+      toast.error("Email is required");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(user.email)) {
+      toast.error("Invalid email format");
+      return false;
+    }
+    if (!user.password.trim() || user.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return false;
+    }
+    return true;
+  };
+
+  const resetForm = () => {
+    setUser({
+      name: "",
+      email: "",
+      password: "",
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateFields()) return;
+
     if (currentState === "Register") {
-      if(!user.name && !user.email && !user.password){
-        toast.error('Please fill all the fields');
-      } else {
-        localStorage.setItem('user', JSON.stringify(user));
-        toast.success('User registered successfully');
-        setCurrentState('Login');
-      }
+      localStorage.setItem('user', JSON.stringify(user));
+      setCurrentState('Login');
+      resetForm();
     } else if (currentState === "Login") {
       const data = JSON.parse(localStorage.getItem('user'));
       if (data.email === user.email && data.password === user.password) {
-        toast.success('User logged in successfully');
         setIsLogin(true);
         navigate('/')
+        resetForm();
       } else {
         toast.error('Invalid credentials');
       }
@@ -51,19 +81,19 @@ const Login = () => {
               ) : (
                 <>
                   <div className="mb-4">
-                    <p className="block text-grsy-700">Name</p>
+                    <p className="block text-grsy-700">Name<sup className="text-red">*</sup></p>
                     <input type="name" className="w-full px-3 py-2 border" placeholder="Enter your name" onChange={(e) => setUser({ ...user, name: e.target.value })} />
                   </div>
                 </>
               )}
 
               <div className="mb-4">
-                <p className="block text-grsy-700">Email</p>
+                <p className="block text-grsy-700">Email<sup className="text-red">*</sup></p>
                 <input type="email" value={user.email} className="w-full px-3 py-2 border" placeholder="Enter your email" onChange={(e) => setUser({ ...user, email: e.target.value })} />
               </div>
               <div className="mb-4">
-                <p className="block text-grsy-700">Password</p>
-                <input type="password" className="w-full px-3 py-2 border" placeholder="Enter your password" onChange={(e) => setUser({ ...user, password: e.target.value })} />
+                <p className="block text-grsy-700">Password<sup className="text-red">*</sup></p>
+                <input type="password" value={user.password} className="w-full px-3 py-2 border" placeholder="Enter your password" onChange={(e) => setUser({ ...user, password: e.target.value })} />
               </div>
               <div className="mb-4 flex items-center justify-center">
                 <div className="inline-flex items-center">
@@ -86,12 +116,12 @@ const Login = () => {
               {currentState === "Login" ? (
                 (<p>
                   Don't have an account?
-                  <button className="text-blue-500 hover:underline" onClick={() => setCurrentState('Register')}>Register</button>
+                  <button className="text-blue-500 hover:underline ml-2" onClick={() => setCurrentState('Register')}>Register</button>
                 </p>)
               ) : (
                 <p>
                   Already have an account?
-                  <button className="text-blue-500 hover:underline" onClick={() => setCurrentState('Login')}>Login</button>
+                  <button className="text-blue-500 hover:underline ml-2" onClick={() => setCurrentState('Login')}>Login</button>
                 </p>
               )}
             </div>
